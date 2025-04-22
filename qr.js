@@ -8,7 +8,7 @@ const fs = require('fs');
 let router = express.Router()
 const pino = require("pino");
 const {
-	default: France_King,
+	default: Trevor_Leyian,
 	useMultiFileAuthState,
 	jidNormalizedUser,
 	Browsers,
@@ -28,13 +28,13 @@ const {
 } = require("node:fs/promises")
 router.get('/', async (req, res) => {
 	const id = makeid();
-	async function FLASH_MD_QR_CODE() {
+	async function MATRIX_XMD_QR_CODE() {
 		const {
 			state,
 			saveCreds
 		} = await useMultiFileAuthState('./temp/' + id)
 		try {
-			let Qr_Code_By_France_King = France_King({
+			let Qr_Code_By_Trevor_Leyian = Trevor_Leyian({
 				auth: state,
 				printQRInTerminal: false,
 				logger: pino({
@@ -43,8 +43,8 @@ router.get('/', async (req, res) => {
 				browser: Browsers.macOS("Desktop"),
 			});
 
-			Qr_Code_By_France_King.ev.on('creds.update', saveCreds)
-			Qr_Code_By_France_Kingr.ev.on("connection.update", async (s) => {
+			Qr_Code_By_Trevor_Leyian.ev.on('creds.update', saveCreds)
+			Qr_Code_By_Trevor_Leyian.ev.on("connection.update", async (s) => {
 				const {
 					connection,
 					lastDisconnect,
@@ -56,9 +56,9 @@ router.get('/', async (req, res) => {
 					let data = fs.readFileSync(__dirname + `/temp/${id}/creds.json`);
 					await delay(800);
 				   let b64data = Buffer.from(data).toString('base64');
-				   let session = await Qr_Code_By_France_King.sendMessage(Qr_Code_By_France_King.user.id, { text: 'TOPU;;;' + b64data });
+				   let session = await Qr_Code_By_Trevor_Leyian.sendMessage(Qr_Code_By_Trevor_Leyian.user.id, { text: 'TOPU;;;' + b64data });
 	
-				   let FLASH_MD_TEXT = `
+				   let MATRIX_XMD_TEXT = `
 *𝑩𝑨𝑹𝑨𝑲𝑨-𝑴𝑫-𝐵𝑂𝑇 𝑺𝑬𝑺𝑺𝑰𝑶𝑵 𝑪𝑶𝑵𝑵𝑬𝑪𝑻𝑬𝑫*
 
 ❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒
@@ -68,7 +68,7 @@ router.get('/', async (req, res) => {
 
 ❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒
 ~𝑭𝒐𝒓 𝒎𝒐𝒓𝒆 𝒊𝒏𝒇𝒐 𝒕𝒂𝒑 𝒐𝒏 𝒕𝒉𝒆 𝒍𝒊𝒏𝒌 𝒃𝒆𝒍𝒐𝒘~ 
-> https://github.com/Kingbega 
+> https://github.com/Trevleg 
 > https://github.com/ibrahimaitech
 
 ❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒
@@ -76,17 +76,17 @@ router.get('/', async (req, res) => {
 > https://wa.me/message/5FF6DYYUQXKSL1
 > https://wa.me/message/74F2PC4JA4F3P1
 
-*𝑴𝑨𝑫𝑬 𝑩𝒀 𝑩𝑨𝑹𝑨𝑲𝑨 𝑩𝑬𝑮𝑨*❒❒❒❒❒❒❒❒❒`
-	 await Qr_Code_By_France_King.sendMessage(Qr_Code_By_France_King.user.id,{text:FLASH_MD_TEXT},{quoted:session})
+*𝑴𝑨𝑫𝑬 𝑩𝒀 TREVOR LEYIAN*❒❒❒❒❒❒❒❒❒`
+	 await Qr_Code_By_Trevor_leyian.sendMessage(Qr_Code_By_Trevor_Leyian.user.id,{text:MATRIX-XMD_TEXT},{quoted:session})
 
 
 
 					await delay(100);
-					await Qr_Code_By_France_King.ws.close();
+					await Qr_Code_By_Trevor_Leyian.ws.close();
 					return await removeFile("temp/" + id);
 				} else if (connection === "close" && lastDisconnect && lastDisconnect.error && lastDisconnect.error.output.statusCode != 401) {
 					await delay(10000);
-					FLASH_MD_QR_CODE();
+					MATRIX_XMD_QR_CODE();
 				}
 			});
 		} catch (err) {
