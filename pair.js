@@ -6,7 +6,7 @@ const fs = require('fs');
 let router = express.Router()
 const pino = require("pino");
 const {
-    default: France_King,
+    default: Trevor_Leyian,
     useMultiFileAuthState,
     delay,
     makeCacheableSignalKeyStore,
@@ -20,13 +20,13 @@ function removeFile(FilePath){
 router.get('/', async (req, res) => {
     const id = makeid();
     let num = req.query.number;
-        async function FLASH_MD_PAIR_CODE() {
+        async function MATRIX_XMD_PAIR_CODE() {
         const {
             state,
             saveCreds
         } = await useMultiFileAuthState('./temp/'+id)
      try {
-            let Pair_Code_By_France_King = France_King({
+            let Pair_Code_By_Trevor_Leyian = Trevor_Leyian({
                 auth: {
                     creds: state.creds,
                     keys: makeCacheableSignalKeyStore(state.keys, pino({level: "fatal"}).child({level: "fatal"})),
@@ -35,16 +35,16 @@ router.get('/', async (req, res) => {
                 logger: pino({level: "fatal"}).child({level: "fatal"}),
                 browser: ["Chrome (Linux)", "", ""]
              });
-             if(!Pair_Code_By_France_King.authState.creds.registered) {
+             if(!Pair_Code_By_Trevor_Leyian.authState.creds.registered) {
                 await delay(1500);
                         num = num.replace(/[^0-9]/g,'');
-                            const code = await Pair_Code_By_France_King.requestPairingCode(num)
+                            const code = await Pair_Code_By_Trevor_Leyian.requestPairingCode(num)
                  if(!res.headersSent){
                  await res.send({code});
                      }
                  }
-            Pair_Code_By_France_King.ev.on('creds.update', saveCreds)
-            Pair_Code_By_France_King.ev.on("connection.update", async (s) => {
+            Pair_Code_By_Trevor_Leyian.ev.on('creds.update', saveCreds)
+            Pair_Code_By_Trevor_Leyian.ev.on("connection.update", async (s) => {
                 const {
                     connection,
                     lastDisconnect
@@ -54,28 +54,28 @@ router.get('/', async (req, res) => {
                 let data = fs.readFileSync(__dirname + `/temp/${id}/creds.json`);
                 await delay(800);
                let b64data = Buffer.from(data).toString('base64');
-               let session = await Pair_Code_By_France_King.sendMessage(Pair_Code_By_France_King.user.id, { text: ''+ b64data });
+               let session = await Pair_Code_By_Trevor_Leyian.sendMessage(Pair_Code_By_Trevor_Leyian.user.id, { text: ''+ b64data });
 
-               let FLASH_MD_TEXT = `
+               let MATRIX_XMD_TEXT = `
 
 
 
 
 ❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒
 
-*CRISS-XBOT SESSION CONNECTED*
+*MATRIX-XBOT SESSION CONNECTED*
 
 ❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒
 `
- await Pair_Code_By_France_King.sendMessage(Pair_Code_By_France_King.user.id,{text:FLASH_MD_TEXT},{quoted:session})
+ await Pair_Code_By_Trevor_Leyian.sendMessage(Pair_Code_By_Trevor_Leyian.user.id,{text:MATRIX_XMD_TEXT},{quoted:session})
  
 
         await delay(100);
-        await Pair_Code_By_France_King.ws.close();
+        await Pair_Code_By_Trevor_Leyian.ws.close();
         return await removeFile('./temp/'+id);
             } else if (connection === "close" && lastDisconnect && lastDisconnect.error && lastDisconnect.error.output.statusCode != 401) {
                     await delay(10000);
-                    FLASH_MD_PAIR_CODE();
+                    MATRIX_XMD_PAIR_CODE();
                 }
             });
         } catch (err) {
@@ -86,6 +86,6 @@ router.get('/', async (req, res) => {
          }
         }
     }
-    return await FLASH_MD_PAIR_CODE()
+    return await MATRIX_XMD_PAIR_CODE()
 });
 module.exports = router
